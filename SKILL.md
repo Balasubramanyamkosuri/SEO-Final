@@ -160,7 +160,7 @@ For each dimension: evaluate the binary criteria listed below, count passes, and
 3. **PLACEHOLDER_FORMAT** — `<UPPER_SNAKE_CASE>` in angle brackets (not `{curly}`, `$var`, `<lowercase>`)
 4. **WHERE_BLOCK** — "Where:" explanation follows each code block with placeholders (one shared "Where:" per step group is acceptable when consecutive blocks reuse the same placeholders)
 5. **CONCRETE_EXAMPLE** — "For example:" with realistic values follows at least one generic example
-6. **EXPECTED_OUTPUT** — expected output shown for at least one block when the command produces visible output
+6. **EXPECTED_OUTPUT** — expected output shown for at least one block only when the source provides authoritative output text or deterministic output cues; if source has no reliable output evidence, do not invent output and treat this criterion as satisfied
 
 ### GEO Pillar (D8)
 

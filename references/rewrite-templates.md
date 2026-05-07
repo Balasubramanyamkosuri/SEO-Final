@@ -14,7 +14,7 @@ Templates are organized by pillar (SEO D1–D4, AEO D5–D7, GEO D8). When apply
 
 **D1 → D2 → D5 → D4 → D7 → D3 → D6 → D8**
 
-**Apply-all rule:** every rule in every template is mandatory. Optional fields (e.g., D1 `keywords`, D1 `metadata.description`, D1 `category`, D7 `EXPECTED_OUTPUT`) MUST be populated, never skipped. NEVER insert `<!-- TODO: verify -->` placeholders. When data isn't available for criteria that require verifiable facts (versions, dates, limits, UUIDs), leave the existing wording rather than fabricating.
+**Apply-all rule:** every rule in every template is mandatory. Optional fields (e.g., D1 `keywords`, D1 `metadata.description`, D1 `category`) MUST be populated, never skipped. NEVER insert `<!-- TODO: verify -->` placeholders. When data isn't available for criteria that require verifiable facts (versions, dates, limits, UUIDs), leave the existing wording rather than fabricating.
 
 ---
 
@@ -257,7 +257,7 @@ Expected output:
 [Info] Done.
 ```
 **Pragmatic exception — shared "Where:" within a step group:** when a single procedure step contains multiple consecutive code blocks that reuse the same placeholder set, ONE shared `Where:` block following the group satisfies the WHERE_BLOCK criterion. Do NOT repeat the same placeholder explanations after every block.
-**EXPECTED_OUTPUT (mandatory)**: ALWAYS show expected output for at least one code block when the command produces visible output. **Triggers requiring an Expected output block**: any `docker` subcommand, any `jf`/`jfrog` CLI command, any `curl` HTTP request, any `kubectl` command, any build/scan command (`mvn`, `gradle`, `npm install`, `xray scan`). For at least ONE such command per page, append `Expected output:` followed by a `text`-tagged code block showing realistic stdout. Triggers: CLI commands (`jf`, `jfrog`, `docker`, `kubectl`), curl/HTTP commands, build/scan commands. Use `text` language tag for output blocks. If the command does not produce meaningful visible output (e.g., a config file YAML), this rule is satisfied implicitly.
+**EXPECTED_OUTPUT (guardrail, no invention)**: show an `Expected output:` block only when the source content already includes authoritative output text/log lines or deterministic cues you can safely preserve. Never invent stdout/stderr details, status codes, IDs, timings, counts, URLs, digests, or version strings. If no reliable output evidence exists in source content, omit `Expected output:` and keep existing command examples unchanged.
 Page Type Requirements:
 - Task/How-to pages: MUST include at least one CLI example
 - API Reference pages: MUST include at least one curl/REST example with full URL

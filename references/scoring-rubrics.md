@@ -361,7 +361,7 @@ Measures how well each section performs when retrieved independently by a RAG/AI
 3. **PLACEHOLDER_FORMAT** — placeholders use `<UPPER_SNAKE_CASE>` in angle brackets; fail if any uses `{curly_braces}`, `$variable`, or `<lowercase>`
 4. **WHERE_BLOCK** — each code example with placeholders has a "Where:" explanation listing each placeholder. Pragmatic exception: when consecutive code blocks within a single procedure step group reuse the same placeholders, one shared "Where:" block following the group satisfies this criterion.
 5. **CONCRETE_EXAMPLE** — a "For example:" block with concrete, realistic values follows at least one generic example
-6. **EXPECTED_OUTPUT** — expected output shown for at least one block when the command produces visible output (CLI command, curl, build, scan)
+6. **EXPECTED_OUTPUT** — expected output shown for at least one block only when source content provides authoritative output text/log lines or deterministic output cues; never fabricate output details when evidence is absent
 
 **Score mapping:** 6/6=5, 5/6=4, 3–4/6=3, 2/6=2, 0–1/6=1
 

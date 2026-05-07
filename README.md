@@ -82,7 +82,7 @@ Skip dimensions are excluded from both the pillar mean and the composite.
 #### Step 3 — Auto-apply all fixes
 For every dimension scoring below 5 (and not Skip), the skill loads its rewrite template from `references/rewrite-templates.md`, applies it to the page, and re-scores. Fix order is fixed: **D1 → D2 → D5 → D4 → D7 → D3 → D6 → D8** (dependency + impact).
 
-There is no "all / partial / none" prompt — fixes are applied automatically. Every template rule is mandatory: D1 always emits `keywords`, `category`, `metadata.description`; D3 forces 8+ adjacent links; D4 forces tables when 3+ parallel items appear in prose; D7 forces an Expected output block for visible-output commands like `docker`, `jf`, `curl`; D8 expands vague references and fixes JFrog product casing without inventing facts.
+There is no "all / partial / none" prompt — fixes are applied automatically. Every template rule is mandatory: D1 always emits `keywords`, `category`, `metadata.description`; D3 forces 8+ adjacent links; D4 forces tables when 3+ parallel items appear in prose; D7 only includes Expected output when source evidence exists (never invented); D8 expands vague references and fixes JFrog product casing without inventing facts.
 
 The skill never:
 
