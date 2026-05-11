@@ -47,7 +47,7 @@ Evaluates the `excerpt` field in YAML frontmatter. Do NOT treat `metadata.descri
 **Criteria (6 binary checks):**
 
 1. **PRESENCE** — `excerpt` field exists in frontmatter
-2. **LENGTH** — 150–160 characters (120–170 acceptable range; outside = fail)
+2. **LENGTH** — **Recommended** 150–160 characters (SERP/hub preview). **Pass band:** 90–170 characters. Fail if fewer than 90 (too thin to be useful) or more than 170 (trim). Do not reward padding with filler solely to lengthen.
 3. **ACTION_VERB** — starts with an imperative action verb (Configure, Learn, Set up, Deploy, Manage, Remove, etc.); third-person forms like "Configures" or "Removes" do not count
 4. **PRODUCT_NAME** — names a specific JFrog product (Artifactory, Xray, Distribution, Curation, Pipelines, JFrog CLI, JFrog Platform)
 5. **USER_BENEFIT** — states what the user will learn or do, ending with a benefit or context phrase
@@ -70,7 +70,7 @@ Evaluates the `excerpt` field in YAML frontmatter. Do NOT treat `metadata.descri
   "excerpt_text": "<the actual excerpt found, or null>",
   "char_count": "<number or null>",
   "violations": ["<specific violation referencing actual page content>"],
-  "fix_suggestion": "<a complete, ready-to-use improved excerpt of 150-160 chars>"
+  "fix_suggestion": "<a complete, ready-to-use improved excerpt; aim 150–160 chars, within 90–170 pass band>"
 }
 ```
 
@@ -155,9 +155,9 @@ Count both markdown links `[text](url)` AND `<Anchor>` JSX components. Categoriz
 
 **Criteria (6 binary checks):**
 
-1. **LINK_COUNT_8_PLUS** — 8+ internal links total (inline + Related Topics); external links do not count
+1. **LINK_COUNT_SCALED** — internal link total (inline + Related Topics) meets the threshold for page size. Approximate **body word count** excluding fenced code blocks (triple-backtick): **fewer than 400 words → ≥4** internal links; **400–799 → ≥6**; **800+ → ≥8**. External links do not count
 2. **RELATED_TOPICS** — `## Related Topics` section (or `## See Also`) at or near bottom with 3–5 descriptive links
-3. **CONTEXTUAL_INLINE** — 3+ contextual inline links connecting JFrog concepts naturally in sentences
+3. **CONTEXTUAL_INLINE** — contextual inline links connecting JFrog concepts naturally in sentences: **≥2** if body has fewer than 400 words (excluding fenced code); **≥3** if 400+ words. Fail if links feel forced (e.g., every sentence linked) on a short page
 4. **DESCRIPTIVE_TEXT** — ALL link text is descriptive; fail if ANY link uses "click here", "here", "this page", "see more", "learn more", or bare URLs
 5. **FIRST_MENTION_LINKED** — JFrog features/products/tools referenced in body are linked on first mention
 6. **ADJACENT_LINKS** — Related-Topics targets are topically adjacent to this page: parent category, prerequisite, next-step / follow-up, sibling feature, troubleshooting guide. Random or weakly-related links fail this criterion.
@@ -169,13 +169,15 @@ Count both markdown links `[text](url)` AND `<Anchor>` JSX components. Categoriz
 {
   "score": "<1-5>",
   "criteria_results": {
-    "link_count_8_plus": "<true|false>",
+    "link_count_scaled": "<true|false>",
     "related_topics_section": "<true|false>",
     "contextual_inline": "<true|false>",
     "descriptive_text": "<true|false>",
     "first_mention_linked": "<true|false>",
     "adjacent_links": "<true|false>"
   },
+  "approx_body_word_count": "<number|null>",
+  "internal_link_target": "<4|6|8|null>",
   "internal_link_count": "<number>",
   "external_link_count": "<number>",
   "non_descriptive_links": ["<link text that is not descriptive>"],
@@ -487,7 +489,7 @@ A perfectly scored (5.0) page follows this structure.
 ````markdown
 ---
 title: "[Descriptive, Keyword-Rich Title]"
-excerpt: "[Imperative verb] [what user learns/does] [with JFrog product]. [Benefit or key context]. 150-160 chars."
+excerpt: "[Imperative verb] [what user learns/does] [with JFrog product]. [Benefit or key context]. Aim 150–160 chars; pass band 90–170."
 category: "[Product Category]"
 metadata:
   title: "[Same title] | JFrog"

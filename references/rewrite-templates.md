@@ -27,7 +27,7 @@ You produce ONLY the YAML frontmatter for a ReadMe / JFrog documentation page (n
 **Required keys (always emit):**
 - `title`: string (page H1, no " | JFrog" suffix here). Preserve from source.
 - `slug`: string. **Copy from source frontmatter verbatim. Never modify or regenerate it.** If absent from source, derive from the file path stem (kebab-case, ASCII).
-- `excerpt`: string. ALWAYS emit. 150–160 characters (120–170 acceptable). MUST start with an imperative action verb (Configure, Learn, Set up, Deploy, Manage, Remove). **Strict character count**: count characters in the final excerpt string before output. If outside 150–160, revise. Do NOT exceed 160 characters under any circumstance. MUST name a specific JFrog product. MUST end with a benefit or context phrase. NEVER use filler ("This page describes...", "Overview of..."). NEVER include API metadata (version strings, permissions). MUST NOT duplicate `metadata.description` wording.
+- `excerpt`: string. ALWAYS emit. **Recommended** 150–160 characters (SERP/hub preview). **Pass band** 90–170: count characters before output — fail the rubric if under 90 or over 170. **Aim** for 150–160 when content supports it; do **not** pad with filler solely to lengthen. MUST start with an imperative action verb (Configure, Learn, Set up, Deploy, Manage, Remove). MUST name a specific JFrog product. MUST end with a benefit or context phrase. NEVER use filler ("This page describes...", "Overview of..."). NEVER include API metadata (version strings, permissions). MUST NOT duplicate `metadata.description` wording.
 - `category`: string. ALWAYS emit. If present in source, preserve. If absent, infer from the file path (e.g., paths under `artifactory/` → `artifactory`; under `xray/` → `xray`; under `pipelines/` → `pipelines`). Use lowercase single-word category.
 - `metadata.title`: string. ALWAYS emit. MUST be `"{title} | JFrog"` (same base title as top-level `title`, with ` | JFrog` suffix).
 - `metadata.description`: string. ALWAYS emit. 120–320 characters. SERP-snippet wording, distinct from `excerpt`. States what the reader will learn/do with concrete nouns. NO "this page describes" filler.
@@ -82,7 +82,7 @@ Link Format:
 - Use `/docs/slug` for internal JFrog doc links: `[Descriptive Text](/docs/slug-name)`
 - Use full URLs for external links: `[Docker Hub](https://hub.docker.com)`
 - Preserve existing `<Anchor>` JSX components exactly as-is
-Link Density Target: **MUST reach 8+ internal links total** (inline + Related Topics). **Minimum-8 enforcement procedure**: count internal links after drafting; if count < 8, add links from these tiers in order until 8: (1) parent feature page, (2) prerequisite setup, (3) next-step / follow-up page, (4) sibling feature in the same product area, (5) troubleshooting guide for the feature, (6) JFrog Platform overview if not already linked, (7) JFrog CLI reference if a CLI is mentioned. Each tier choice must remain topically adjacent — never reach for unrelated marketing pages or top-level hubs. If you cannot find 8 unique adjacent topics in the page content, link to broader related pages (parent feature, sibling features, troubleshooting guide for the feature area, prerequisite setup pages) until you reach 8 internal links total. Never leave the page with fewer than 8.
+Link density (scaled to page size): approximate **body word count** excluding fenced code blocks (triple-backtick). **Minimum internal links** (inline + Related Topics): **fewer than 400 words → ≥4**; **400–799 → ≥6**; **800+ → ≥8**. **Minimum contextual inline links** in prose: **≥2** if fewer than 400 body words; **≥3** if 400+. **Enforcement procedure**: count words (excluding fenced code), set targets, then count internal links after drafting; if below target, add links from these tiers in order: (1) parent feature page, (2) prerequisite setup, (3) next-step / follow-up page, (4) sibling feature in the same product area, (5) troubleshooting guide for the feature, (6) JFrog Platform overview if not already linked, (7) JFrog CLI reference if a CLI is mentioned. Each tier must stay topically adjacent — never unrelated marketing or random hubs. Prefer **reading flow**: natural first-mention links; do **not** link every sentence or clutter short pages.
 Required Section — Related Topics (with adjacency rule):
 - MUST add `## Related Topics` as the LAST section of the page (before any existing final section like "See Also").
 - Include 3–5 links. **Each link MUST be topically adjacent** to this page. Choose from the following relationship types:
@@ -101,7 +101,7 @@ Inline Link Rules:
 - Do NOT add links inside headings, code blocks, or `<Callout>` content.
 External Links (allowed but not required):
 - Link to official external docs when referencing third-party tools (Docker docs, Kubernetes docs, HashiCorp docs, etc.).
-- These count as external (not toward the 8+ internal link target).
+- These count as external (not toward the scaled internal link target).
 Slug Inference (mandatory when source slug is unknown):
 - ALWAYS derive the slug from the feature name: kebab-case, lowercase, product-prefixed.
 - Examples: `/docs/docker-repositories`, `/docs/xray-watches`, `/docs/jfrog-cli-setup`

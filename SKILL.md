@@ -102,7 +102,7 @@ For each dimension: evaluate the binary criteria listed below, count passes, and
 **D1 Meta description** (6 criteria) — evaluate the `excerpt` field in YAML frontmatter, not `metadata.description`:
 
 1. **PRESENCE** — `excerpt` field exists
-2. **LENGTH** — 150–160 chars (120–170 acceptable)
+2. **LENGTH** — **Recommended** 150–160 chars (SERP/hub preview). **Pass band** 90–170: fail if fewer than 90 characters (too thin to be useful) or more than 170 (trim). Do not pad with filler solely to lengthen.
 3. **ACTION_VERB** — starts with imperative verb (Configure, Learn, Deploy — not third-person "Configures")
 4. **PRODUCT_NAME** — names a JFrog product (Artifactory, Xray, Pipelines, CLI, Distribution, Curation, Platform)
 5. **USER_BENEFIT** — states what user will learn/do with benefit or context
@@ -117,11 +117,11 @@ For each dimension: evaluate the binary criteria listed below, count passes, and
 5. **DESCRIPTIVE_HEADINGS** — no vague single-word headings ("Details", "More Info", "Notes", "Overview" alone)
 6. **NO_BOLD_PSEUDO_HEADINGS** — no standalone `**bold lines**` acting as section dividers
 
-**D3 Internal & adjacent linking** (6 criteria) — count both markdown links `[text](url)` and `<Anchor>` JSX components. Categorize as internal (`/docs/` or relative) or external (full URLs):
+**D3 Internal & adjacent linking** (6 criteria) — count both markdown links `[text](url)` and `<Anchor>` JSX components. Categorize as internal (`/docs/` or relative) or external (full URLs). For word-count thresholds, approximate **body words outside fenced code blocks** (triple-backtick fences; headings and list items count).
 
-1. **LINK_COUNT_8_PLUS** — 8+ internal links total (inline + Related Topics); external links don't count
+1. **LINK_COUNT_SCALED** — internal link total (inline + Related Topics) meets the threshold for page size: fewer than 400 body words → **≥4** internal links; 400–799 words → **≥6**; 800+ words → **≥8**. External links don't count
 2. **RELATED_TOPICS** — `## Related Topics` or `## See Also` section at or near bottom with 3–5 links
-3. **CONTEXTUAL_INLINE** — 3+ inline links in body connecting JFrog concepts
+3. **CONTEXTUAL_INLINE** — contextual inline links in the body connecting JFrog concepts: **≥2** if body has fewer than 400 words (excluding fenced code); **≥3** if 400+ words. Links must feel natural — do not link every sentence or overload short paragraphs
 4. **DESCRIPTIVE_TEXT** — all link text descriptive (never "click here", "here", bare URLs)
 5. **FIRST_MENTION_LINKED** — JFrog features/tools linked on first mention
 6. **ADJACENT_LINKS** — Related-Topics targets are topically adjacent (parent / prerequisite / next step / sibling feature / troubleshooting), not random or unrelated pages
@@ -224,7 +224,7 @@ Emit a single unified before/after report. Format:
 
 - **D1 Meta description** (X/5 → 5/5): rewrote excerpt + added keywords + metadata.description
 - **D2 Heading hierarchy** (X/5 → 5/5): promoted 3 bold pseudo-headings; demoted 1 H4 to H3
-- **D3 Internal & adjacent linking** (X/5 → 5/5): added 6 links + Related Topics with adjacency
+- **D3 Internal & adjacent linking** (X/5 → 5/5): met scaled link targets + Related Topics with adjacency
 - ...
 
 ### Diffs
