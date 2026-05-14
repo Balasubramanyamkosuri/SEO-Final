@@ -262,10 +262,10 @@ Pages with <200 words of body content may not warrant a FAQ — score 3 minimum.
 **Criteria (6 binary checks):**
 
 1. **FAQ_HEADING** — `## Frequently Asked Questions` section exists (exact heading text, H2 level)
-2. **QUESTION_COUNT** — contains 3–8 Q&A pairs formatted as H3 headings followed by answer text
-3. **NATURAL_LANGUAGE** — questions phrased as users would naturally ask (starting with How/What/Why/When/Which/Can/Does/Is); fail if jargon-heavy or declarative
-4. **SELF_CONTAINED** — each answer understandable without reading the rest of the page; fail if any answer says "as described above" or assumes prior reading
-5. **CONCISE_ANSWERS** — each answer is 1–3 sentences; fail if any exceeds 4 sentences
+2. **QUESTION_COUNT** — contains 3–8 Q/A pairs inside a single `<Accordion title="FAQs" icon="plus">` block, each pair using `##### Q: <question>` immediately followed by an answer that begins with `<strong>A:</strong>` (canonical FAQ Topic Template). A short introduction paragraph between the H2 and the Accordion is allowed and expected when following the template.
+3. **NATURAL_LANGUAGE** — each `##### Q:` question is phrased as users would naturally ask (starting with How/What/Why/When/Which/Can/Does/Is); fail if jargon-heavy or declarative
+4. **SELF_CONTAINED** — each `<strong>A:</strong>` answer body is understandable without reading the rest of the page; fail if any answer says "as described above" without providing a link, or assumes prior reading
+5. **CONCISE_ANSWERS** — each answer body (after `<strong>A:</strong>`) is 1–3 sentences; fail if any exceeds 4 sentences
 6. **ANCHOR_LINKS** — at least one answer links to a detailed section using `[text](#anchor)` format
 
 **Score mapping:** 6/6=5, 5/6=4, 3–4/6=3, 2/6=2, 0–1/6=1
@@ -283,7 +283,7 @@ Pages with <200 words of body content may not warrant a FAQ — score 3 minimum.
     "anchor_links": "<true|false>"
   },
   "question_count": "<number>",
-  "questions_found": ["<list of question headings>"],
+  "questions_found": ["<question text from each ##### Q: line>"],
   "violations": ["<specific violation descriptions>"],
   "fix_suggestions": ["<specific improvements or sample FAQ entries>"]
 }
@@ -301,17 +301,21 @@ Pages with <200 words of body content may not warrant a FAQ — score 3 minimum.
 ```markdown
 ## Frequently Asked Questions
 
-### How do I push a Docker image to Artifactory?
-Tag your image with the Artifactory registry prefix, then run `docker push`.
-See [Push a Docker Image](#push-a-docker-image) for detailed steps.
+This section provides answers to frequently asked questions.
 
-### What's the difference between local and remote Docker repositories?
-Local repositories store images you build internally. Remote repositories
-proxy and cache images from external registries like Docker Hub.
+<Accordion title="FAQs" icon="plus">
+  ##### Q: How do I push a Docker image to Artifactory?
 
-### Can I use Docker repositories with Podman?
-Yes. Artifactory supports OCI-compliant container images. Configure Podman
-to use your Artifactory registry URL.
+  <strong>A:</strong> Tag your image with the Artifactory registry prefix, then run `docker push`. See [Push a Docker Image](#push-a-docker-image) for detailed steps.
+
+  ##### Q: What is the difference between local and remote Docker repositories?
+
+  <strong>A:</strong> Local repositories store images you build internally. Remote repositories proxy and cache images from external registries like Docker Hub.
+
+  ##### Q: Can I use Docker repositories with Podman?
+
+  <strong>A:</strong> JFrog Artifactory supports OCI-compliant container images. Configure Podman to use your Artifactory registry URL.
+</Accordion>
 ```
 
 ---
@@ -541,14 +545,21 @@ Operation completed successfully.
 
 ## Frequently Asked Questions
 
-### [Question 1 — most common user question]?
-[1-3 sentence answer. Link to detailed section.]
+This section provides answers to frequently asked questions.
 
-### [Question 2 — common mistake or confusion]?
-[1-3 sentence answer.]
+<Accordion title="FAQs" icon="plus">
+  ##### Q: [Question 1 — most common user question]?
 
-### [Question 3 — related feature question]?
-[1-3 sentence answer.]
+  <strong>A:</strong> [1–3 sentence answer. Link to detailed section.]
+
+  ##### Q: [Question 2 — common mistake or confusion]?
+
+  <strong>A:</strong> [1–3 sentence answer.]
+
+  ##### Q: [Question 3 — related feature question]?
+
+  <strong>A:</strong> [1–3 sentence answer.]
+</Accordion>
 
 ## Related Topics
 - [Parent feature page](/docs/parent-slug) — overview of this feature area

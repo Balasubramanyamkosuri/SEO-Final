@@ -23,6 +23,8 @@ You are an expert documentation SEO/AEO/GEO auditor for JFrog documentation host
 | [`references/scoring-rubrics.md`](references/scoring-rubrics.md) | Borderline scores, structured output | JSON output schemas per dimension, fix before/after examples, JFrog product name list, golden page template |
 | [`references/rewrite-templates.md`](references/rewrite-templates.md) | Applying fixes (Step 3) | 8 dedicated rewrite prompts, one per dimension, each optimized through autoresearch to perfect validation scores |
 
+**Optional (Step 3b, file-backed only):** The Cursor skills **docs-template-checker** (FAQ Topic Template in its `REFERENCE.md`) and **style-guide-validator** (JFrog style in its `REFERENCE.md`) complement Step 3; they do **not** define additional SAG binary criteria. See **Step 3b** below.
+
 Do not invent criteria beyond this skill and those reference files.
 
 **Pillar layout:**
@@ -139,10 +141,10 @@ For each dimension: evaluate the binary criteria listed below, count passes, and
 **D5 FAQ section** (6 criteria) — pages with <200 words body: score 3 minimum:
 
 1. **FAQ_HEADING** — `## Frequently Asked Questions` exists (exact H2 text)
-2. **QUESTION_COUNT** — 3–8 Q&A pairs as H3 headings with answers
-3. **NATURAL_LANGUAGE** — questions start with How/What/Why/When/Which/Can/Does/Is
-4. **SELF_CONTAINED** — each answer understandable without reading the rest of the page
-5. **CONCISE_ANSWERS** — each answer 1–3 sentences (fail if any exceeds 4)
+2. **QUESTION_COUNT** — 3–8 Q/A pairs inside `<Accordion title="FAQs" icon="plus">`, each `##### Q:` followed by `<strong>A:</strong>` (see FAQ Topic Template in docs-template-checker `REFERENCE.md`); intro paragraph before Accordion allowed
+3. **NATURAL_LANGUAGE** — each `##### Q:` line starts with How/What/Why/When/Which/Can/Does/Is (natural user phrasing)
+4. **SELF_CONTAINED** — each answer after `<strong>A:</strong>` understandable without reading the rest of the page
+5. **CONCISE_ANSWERS** — each answer body 1–3 sentences (fail if any exceeds 4)
 6. **ANCHOR_LINKS** — at least one answer links to a section via `[text](#anchor)`
 
 **D6 RAG chunk quality** (5 criteria):
@@ -195,6 +197,13 @@ For each fix:
 4. Re-score the affected dimension and any criteria the edit may have touched (e.g., a D2 heading edit may also touch D6 DESCRIPTIVE_HEADINGS).
 
 If the page is pasted text (no file on disk), generate the proposed full-page output instead of editing in place. Note this in the report.
+
+### Step 3b — Optional cross-skill checks (file-backed only)
+
+When the target resolves to a real `.md` path you can read (and write, if your workflow saves edits):
+
+1. **D5 / docs-template-checker** — After applying the D5 template, run the **Documentation Template Checker** (`docs-template-checker`) on the FAQ portion: scope to `## Frequently Asked Questions` through the closing `</Accordion>`, treat that slice as one **FAQ** topic, and validate or fix per that skill’s `REFERENCE.md` (FAQ Topic Template). Skip if there is no file path or the page has no FAQ block yet.
+2. **style-guide-validator** — Optionally run the **JFrog Style Guide Validator** (`style-guide-validator`) on the full saved file (or on the line ranges you changed) to align voice, punctuation, tables, lists, and link text with that skill’s `REFERENCE.md` without widening edits beyond what those rules require. **Do not** use this pass to replace Step 3 dimension templates (counts, thresholds, and SAG-only rules stay authoritative). Skip entirely for pasted-only audits with no on-disk file.
 
 ---
 

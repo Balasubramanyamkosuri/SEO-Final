@@ -78,6 +78,9 @@ INPUT: The next message contains (1) the YAML frontmatter and (2) the full markd
 
 
 You improve ONLY the internal linking of a JFrog documentation page. Output the full markdown body with added/improved internal links. Do NOT change any content that is not link-related.
+
+**Style-guide alignment:** Inline and Related Topics link text MUST also satisfy the **style-guide-validator** Cursor skill (`style-guide-validator`) — link rules in that skill’s `REFERENCE.md` (descriptive text; no “click here”, “learn more”, “this page”, or bare URLs as link text). **This template alone** governs scaled internal-link counts, `## Related Topics` placement and format, adjacency tiers, first-mention linking, slug rules, and out-of-scope exclusions.
+
 Link Format:
 - Use `/docs/slug` for internal JFrog doc links: `[Descriptive Text](/docs/slug-name)`
 - Use full URLs for external links: `[Docker Hub](https://hub.docker.com)`
@@ -118,6 +121,9 @@ INPUT: The next message contains (1) the YAML frontmatter and (2) the full markd
 
 
 You restructure ONLY the formatting of a JFrog documentation page to maximize structured data markers for search engine snippet extraction. Output the full markdown body with improved structure. Do NOT change the actual content meaning.
+
+**Style-guide alignment:** Markdown **tables and lists** you add or materially edit MUST also follow **style-guide-validator** (`style-guide-validator`) `REFERENCE.md` (e.g., header row, no merged cells; list capitalization and period consistency; bolding for Name: Description list items where that guide applies). **This template alone** governs when to introduce comparison tables and lists from prose, JSX preservation, the definition-style bold scope below, and paragraph-breaking for scannability.
+
 JSX/HTML Component Preservation (CRITICAL):
 - NEVER modify `<Table>`, `<Callout>`, `<Anchor>`, `<Tabs>`, or any JSX/HTML component. Preserve them exactly as-is, including all attributes and children.
 - If a page uses `<Table>` components instead of markdown tables, leave them untouched. Do NOT convert them to markdown.
@@ -165,35 +171,18 @@ INPUT: The next message contains (1) the YAML frontmatter and (2) the full markd
 
 ### D5: FAQ Section Rewrite Template
 
+Use the **Documentation Template Checker** Cursor skill (`docs-template-checker`) as the single source of truth.
 
-You generate ONLY a FAQ section for a JFrog documentation page. Output ONLY the `## Frequently Asked Questions` section with 3–5 Q&A pairs. No other content.
-Format:
-## Frequently Asked Questions
-### [Question phrased as user would ask it]?
-[1-3 sentence self-contained answer. Link to detailed section where applicable.]
-Question Generation Strategy: **MUST cover all 5 question types when page content supports them**:
-1. **PRIMARY HOW-TO**: "How do I [primary action described on this page]?"
-2. **COMMON MISTAKE**: "What happens if I [common misconfiguration or error]?"
-3. **KEY DIFFERENCE**: "What is the difference between [option A] and [option B]?"
-4. **PREREQUISITE**: "What do I need before [performing this action]?" or "What permissions are required?"
-5. **RELATED FEATURE**: "Can I also [related capability]?" or "Does this work with [integration]?"
-Aim for 5 questions. Minimum 3, maximum 8. Skip a type ONLY if the page content provides no factual basis for it (e.g., a Concept page with no procedure cannot answer PRIMARY HOW-TO).
-Question Rules:
-- MUST be phrased in natural user language — as if typed into a search engine.
-- MUST start with How, What, Why, When, Which, Where, Can, Does, or Is.
-- NEVER use jargon-heavy or internally-focused questions.
-- NEVER ask questions whose answer is simply "yes" or "no" without elaboration.
-- Questions MUST be specific to THIS page's topic — not generic JFrog questions.
-- Do NOT invent FAQs for topics that don't have real recurring user questions. If the page is too narrow or the body is under 200 words, return a short note instead of fabricating questions; the rubric scores 3 minimum on tiny pages.
-Answer Rules:
-- Each answer MUST be self-contained: understandable WITHOUT reading the rest of the page.
-- Maximum 3 sentences per answer. Prefer 1–2.
-- MUST include an anchor link to the relevant section when a target section exists. Aim for an anchor link in every answer where the page has a relevant section to point at; minimum one anchor link in the FAQ section overall.
-- NEVER repeat the question text in the answer.
-- Include specific product names, version numbers, or configuration values where the source content provides them.
-- For API reference pages: focus on "when would I use this endpoint" and "what permissions do I need".
-OUTPUT: Only the FAQ section markdown, starting with `## Frequently Asked Questions`.
+**Before generating or editing the FAQ block:** Read the entire **FAQ Topic Template** in that skill’s `REFERENCE.md` (from `# FAQ Topic Template` through **Example: Properly Formatted FAQ Topic**). Follow that structure and every rule there: section title, introduction paragraph, `<Accordion title="FAQs" icon="plus">`, `##### Q:` / `<strong>A:</strong>` pairs, question-type coverage, question/answer content rules, placement on the page, and the canonical example.
+
+**After drafting:** Run the same skill on the FAQ portion of the file (scoped to the FAQ section when the file is long), per the skill’s workflow: treat the scoped content as one **FAQ** topic, validate against `REFERENCE.md`, apply fixes the skill would apply, and preserve MDX components as the skill requires.
+
+**Tiny / under-specified pages:** If the page body is too narrow or under ~200 words to support real recurring questions, return a short note instead of inventing Q&A; align with the skill’s scope and the rubric’s minimum score guidance for tiny pages.
+
+OUTPUT: Only the FAQ topic markdown that conforms to the FAQ Topic Template in `docs-template-checker`’s `REFERENCE.md` (from the `## Frequently Asked Questions` heading through the closing `</Accordion>`).
+
 INPUT: The next message contains (1) the YAML frontmatter and (2) the full markdown body.
+
 ---
 
 ---
@@ -283,6 +272,9 @@ INPUT: The next message contains (1) the YAML frontmatter and (2) the full markd
 
 
 You improve ONLY the citation-worthiness of a JFrog documentation page by adding specific, concrete, verifiable details. Output the full markdown body with enhanced specificity. NEVER invent facts.
+
+**Style-guide alignment:** **JFrog product naming, UI terminology, and casing** must align with **style-guide-validator** (`style-guide-validator`) `REFERENCE.md` as well as the product list in [`scoring-rubrics.md`](scoring-rubrics.md). **This template alone** governs version/limit/date sourcing and the prohibition on fabricating facts.
+
 Specificity Rules:
 1. **VERSION NUMBERS**: Add "Available from [Product] [version]" or "Supported since [version]" ONLY when the source content already provides the version number elsewhere on the page. If the source doesn't state a version and you don't have one to copy, leave the existing wording unchanged. NEVER fabricate a version number.
 2. **EXACT LIMITS**: Replace vague quantities with exact numbers ONLY when the source provides them:
