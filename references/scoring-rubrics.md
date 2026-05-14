@@ -96,7 +96,7 @@ excerpt: "Configure SAML SSO authentication in JFrog Platform with Azure AD, Goo
 
 1. **NO_H1_IN_BODY** — body contains zero `# ` (H1) headings; H1 comes only from frontmatter title
 2. **STARTS_AT_H2** — first heading in the body is `##` (H2), not H3 or deeper; if body has NO headings, this passes
-3. **NO_SKIPPED_LEVELS** — no heading level is skipped (H2→H4 without H3, H3→H5 without H4); check every pair of consecutive headings
+3. **NO_SKIPPED_LEVELS** — no heading level is skipped (H2→H4 without H3, H3→H5 without H4); check every pair of consecutive headings. **Edge case (FAQ Accordion):** `##### Q:` lines inside `<Accordion title="FAQs" icon="plus">` are exempt — the Accordion is the canonical FAQ container per `docs-template-checker` REFERENCE.md. When evaluating consecutive heading pairs, treat the H2 `## Frequently Asked Questions` and the H5 `##### Q:` lines inside the Accordion as a single unit and do not count the H2→H5 jump as a skip.
 4. **NO_FORMATTING_IN_HEADINGS** — no bold (`**`), italic (`*` or `_`), or inline code (backticks) inside any heading line
 5. **DESCRIPTIVE_HEADINGS** — every heading describes its section content; fail if ANY heading is just "Details", "More Info", "Notes", "Overview" (without qualifier), "Additional", "Other"
 6. **NO_BOLD_PSEUDO_HEADINGS** — no standalone bold lines acting as section dividers (e.g., `**To assign a ticket:**` on its own line); definition-style bold (bold term + description on same/next line) is acceptable

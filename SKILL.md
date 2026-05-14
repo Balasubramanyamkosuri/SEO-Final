@@ -3,11 +3,13 @@ name: seo-final
 description: >-
   Audit and optimize JFrog ReadMe-style documentation for SEO, AEO, and GEO using a consolidated 8-dimension rubric.
   Primary user command phrase: **seo final** — read and follow this skill when the user types or says that
-  (or asks for SEO+AEO+GEO Final / SAG audit).
-  Classifies the page (Task / Concept / Reference / Landing), scores 8 dimensions on binary criteria,
-  auto-applies all fixes for any dimension below 5/5, then emits a single unified before/after report
-  with pillar+composite scores, per-fix one-liners, and collapsible diffs. Use for SEO/AEO/GEO audits,
-  AI-ready docs, citation scoring, or doc quality reports.
+  (or asks for SEO+AEO+GEO Final / SAG audit). Classifies the page (Task / Concept / Reference / Landing), scores 8
+  dimensions on binary criteria, auto-applies all fixes for any dimension below 5/5, then emits a single unified
+  before/after report with pillar+composite scores, per-fix one-liners, and collapsible diffs. The D5 FAQ section
+  follows the canonical FAQ Topic Template (introduction paragraph + `<Accordion title="FAQs" icon="plus">` with
+  `##### Q:` / `<strong>A:</strong>` pairs) defined in the docs-template-checker skill. Optional file-backed Step 3b
+  hands off post-validation to docs-template-checker (FAQ section) and style-guide-validator (JFrog style). Use for
+  SEO/AEO/GEO audits, AI-ready docs, citation scoring, or doc quality reports.
 ---
 
 # SEO + AEO + GEO Documentation Optimizer (SAG)
@@ -114,7 +116,7 @@ For each dimension: evaluate the binary criteria listed below, count passes, and
 
 1. **NO_H1_IN_BODY** — zero `#` (H1) headings in body; H1 comes only from frontmatter `title`
 2. **STARTS_AT_H2** — first body heading is `##`; if body has no headings, passes
-3. **NO_SKIPPED_LEVELS** — every heading level increments by 1 (no H2→H4)
+3. **NO_SKIPPED_LEVELS** — every heading level increments by 1 (no H2→H4). **Edge case (FAQ Accordion):** `##### Q:` lines inside `<Accordion title="FAQs" icon="plus">` are exempt — the Accordion is the canonical FAQ container per `docs-template-checker` REFERENCE.md, and the `##### Q:` heading is part of the canonical Q/A pair format. Do not count this jump as a skip.
 4. **NO_FORMATTING_IN_HEADINGS** — no bold/italic/code inside headings
 5. **DESCRIPTIVE_HEADINGS** — no vague single-word headings ("Details", "More Info", "Notes", "Overview" alone)
 6. **NO_BOLD_PSEUDO_HEADINGS** — no standalone `**bold lines**` acting as section dividers

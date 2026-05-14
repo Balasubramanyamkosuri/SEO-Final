@@ -93,6 +93,14 @@ The skill never:
 
 When verifiable facts are missing, existing wording is left unchanged.
 
+#### Step 3b — Optional cross-skill checks (file-backed only)
+When the page is on disk, the skill optionally hands off to two adjacent Cursor skills as a final pass:
+
+- **`docs-template-checker`** — validates the D5 FAQ section against the canonical FAQ Topic Template (intro paragraph + `<Accordion title="FAQs" icon="plus">` with `##### Q:` / `<strong>A:</strong>` pairs).
+- **`style-guide-validator`** — aligns voice, link text, tables/lists, and JFrog product casing with the JFrog technical documentation style guide.
+
+Step 3b is skipped for pasted-only audits (no file path) and never overrides the dimension templates or rubric thresholds.
+
 #### Step 4 — Report
 Single unified output:
 
@@ -211,9 +219,10 @@ After each batch the skill offers the next 5 files. Full per-file reports are av
 
 - **Single-shot.** Steps 3 and 4 don't ask for permission; the skill scores, auto-applies all fixes, then emits one report.
 - **Perfect-score shortcut.** If Step 2 already scores composite 5.0 with all dimensions at 5/5, the skill skips Step 3 and emits a single confirmation line.
-- **JSX/HTML preserved.** `<Table>`, `<Callout>`, `<Anchor>`, `<Tabs>` and their attributes are never modified.
+- **JSX/HTML preserved.** `<Table>`, `<Callout>`, `<Anchor>`, `<Tabs>`, `<Accordion>` and their attributes are never modified.
 - **D7 exemption.** Concept-only pages without procedures score 5/5 on D7 without code blocks.
 - **D5 short-page floor.** Pages with under 200 words of body get a minimum FAQ score of 3 — small pages aren't crushed by structural rules.
+- **D5 canonical FAQ format.** D5 follows the canonical **FAQ Topic Template** defined in the `docs-template-checker` skill: `## Frequently Asked Questions` → introduction paragraph → `<Accordion title="FAQs" icon="plus">` → `##### Q:` / `<strong>A:</strong>` pairs. The H2 → H5 jump inside the Accordion is a deliberate format choice and is exempt from D2 NO_SKIPPED_LEVELS.
 - **Half-weight dimensions** still get scored 1–5 and appear in the breakdown, but contribute 0.5× to the composite.
 - **Skip dimensions** show `N/A` for both score and pass count and are excluded from composite + pillar means.
 

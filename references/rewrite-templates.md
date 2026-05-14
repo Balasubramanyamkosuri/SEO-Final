@@ -52,7 +52,7 @@ You rewrite ONLY the heading structure of a JFrog documentation page. Output the
 Rules:
 1. The `title` field in YAML frontmatter is the page's H1. NEVER use `#` (H1) in the body.
 2. Body headings MUST start at `##` (H2) for major sections.
-3. NEVER skip heading levels: no H2→H4, no H1→H3. Each level must increment by exactly one. If you find `####` directly under `##`, insert an intermediate `###` or promote the `####` to `###`.
+3. NEVER skip heading levels: no H2→H4, no H1→H3. Each level must increment by exactly one. If you find `####` directly under `##`, insert an intermediate `###` or promote the `####` to `###`. **Edge case (FAQ Accordion):** `##### Q:` lines inside `<Accordion title="FAQs" icon="plus">` are exempt from this rule — that H2→H5 jump is the canonical FAQ Topic Template pattern (per `docs-template-checker` REFERENCE.md). Do NOT insert intervening H3 or H4 headings, do NOT promote `##### Q:` to a lower number, and do NOT report this as a skip.
 4. NEVER put bold, italic, or code formatting inside headings: `### **Bold heading**` → `### Bold heading`.
 5. Every heading MUST be descriptive. Replace vague headings with specific ones:
    - "Details" → describe what details (e.g., "Watch configuration details")
@@ -173,7 +173,7 @@ INPUT: The next message contains (1) the YAML frontmatter and (2) the full markd
 
 Use the **Documentation Template Checker** Cursor skill (`docs-template-checker`) as the single source of truth.
 
-**Before generating or editing the FAQ block:** Read the entire **FAQ Topic Template** in that skill’s `REFERENCE.md` (from `# FAQ Topic Template` through **Example: Properly Formatted FAQ Topic**). Follow that structure and every rule there: section title, introduction paragraph, `<Accordion title="FAQs" icon="plus">`, `##### Q:` / `<strong>A:</strong>` pairs, question-type coverage, question/answer content rules, placement on the page, and the canonical example.
+**Before generating or editing the FAQ block:** Read the entire **FAQ Topic Template** in that skill’s `REFERENCE.md` (from `# FAQ Topic Template` through **Example: Properly Formatted FAQ Topic**). Follow that structure and every rule there: section title, introduction paragraph, `<Accordion title="FAQs" icon="plus">`, `##### Q:` / `<strong>A:</strong>` pairs, question-type coverage, question/answer content rules, placement on the page, and the canonical example. **In particular, read the "Question Types and Content" subsection** of that REFERENCE.md (5 question types: PRIMARY HOW-TO / COMMON MISTAKE / KEY DIFFERENCE / PREREQUISITE / RELATED FEATURE; 3–8 questions with 5 ideal; question phrasing rules; answer rules including the anchor-link-per-answer aim; tiny-page floor for pages under ~200 words). Those generation rules are mandatory for D5; the structural rules above are necessary but not sufficient without them.
 
 **After drafting:** Run the same skill on the FAQ portion of the file (scoped to the FAQ section when the file is long), per the skill’s workflow: treat the scoped content as one **FAQ** topic, validate against `REFERENCE.md`, apply fixes the skill would apply, and preserve MDX components as the skill requires.
 
